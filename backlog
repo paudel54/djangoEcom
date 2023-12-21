@@ -1,0 +1,88 @@
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const reducer = combineReducers({});
+
+const initialState = {};
+
+const middleware = [thunk];
+
+const store = createStore(
+    reducer,
+    initialState,
+    composeWithDevTools(applyMiddleware(...middleware))
+);
+
+export default store;
+
+
+
+/////////////////
+import { createSlice } from "@reduxjs/toolkit";
+import moment, { type Moment } from "moment";
+
+export interface DetailLogReportFilters {
+  store_id: null | number;
+  sales_representative_id: null | number;
+  date: Moment;
+}
+
+interface DetailedLogReportFilterState {
+  detailLogReportFilters: DetailLogReportFilters;
+}
+
+const initialState: DetailedLogReportFilterState = {
+  detailLogReportFilters: {
+    store_id: 1,
+    sales_representative_id: null,
+    date: moment(),
+  },
+};
+
+const detailedLogReportFiltersSlice = createSlice({
+  name: "detailedLogReportFilters",
+  initialState,
+  reducers: {
+    setDetailLogReportFilters: (state, action) => {
+      state.detailLogReportFilters = action.payload;
+    },
+  },
+});
+
+export const { setDetailLogReportFilters } = detailedLogReportFiltersSlice.actions;
+
+export default detailedLogReportFiltersSlice.reducer;
+
+
+//////////////////////////////////////////////////
+import { createSlice } from "@reduxjs/toolkit";
+import moment, { type Moment } from "moment";
+
+export type FilterType = "user" | "store";
+
+const initialState: {
+  selectedDate: Moment | null;
+  filter: FilterType;
+} = {
+  selectedDate: moment(),
+  filter: "user",
+};
+
+const summaryLogReportSlice = createSlice({
+  name: "summaryLogReport",
+  initialState,
+  reducers: {
+    setSelectedDate: (state, { payload }: { payload: Moment }) => {
+      state.selectedDate = payload;
+    },
+    setFilter: (state, { payload }: { payload: FilterType }) => {
+      state.filter = payload;
+    },
+  },
+});
+
+// Action creators are generated for each case reducer function
+export const { setSelectedDate, setFilter } = summaryLogReportSlice.actions;
+
+export default summaryLogReportSlice.reducer;

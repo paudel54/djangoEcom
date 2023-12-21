@@ -19,7 +19,7 @@ const ProductScreen = () => {
             setProduct(data)
         }
         fetchProduct()
-    })
+    }, [])
 
     return (
         <div>
