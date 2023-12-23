@@ -25,6 +25,7 @@ export const listProducts = createAsyncThunk('productList/listProducts', async (
 const productListSlice = createSlice({
     name: 'productList',
     initialState,
+    reducer: {},
     extraReducers: (builder) => {
         builder
             .addCase(listProducts.pending, (state) => {
