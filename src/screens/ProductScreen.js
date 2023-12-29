@@ -110,7 +110,7 @@ const ProductScreen = () => {
                                     <ListGroup.Item>
                                         <Button
                                             onClick={addToCartHandler}
-                                            className='btn-block' disabled={product.countInStock === 0}
+                                            className='w-100' disabled={product.countInStock === 0}
                                             type='button'>
                                             Add to Cart
                                         </Button>
